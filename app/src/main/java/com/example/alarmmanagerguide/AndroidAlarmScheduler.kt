@@ -8,11 +8,10 @@ import java.time.ZoneId
 
 class AndroidAlarmScheduler(
     val context: Context
-): AlarmScheduler {
-
+) {
     val alarmManager = context.getSystemService(AlarmManager::class.java)
 
-    override fun schedule(item: AlarmItem) {
+    fun schedule(item: AlarmItem) {
         val intent = Intent(context, AlarmReceiver::class.java)
         intent.putExtra("EXTRA_MESSAGE", item.message)
         alarmManager.setExactAndAllowWhileIdle(
@@ -22,17 +21,6 @@ class AndroidAlarmScheduler(
                 context,
                 item.hashCode(),
                 intent,
-                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-            )
-        )
-    }
-
-    override fun cancel(item: AlarmItem) {
-        alarmManager.cancel(
-            PendingIntent.getBroadcast(
-                context,
-                item.hashCode(),
-                Intent(context, AlarmReceiver::class.java),
                 PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
             )
         )

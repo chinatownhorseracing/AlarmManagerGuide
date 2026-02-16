@@ -1,6 +1,0 @@
-package com.example.alarmmanagerguide
-
-interface AlarmScheduler {
-    fun schedule(item: AlarmItem)
-    fun cancel(item: AlarmItem)
-}

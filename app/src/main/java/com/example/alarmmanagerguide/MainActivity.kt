@@ -28,69 +28,26 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val scheduler = AndroidAlarmScheduler(this)
-        var alarmItem: AlarmItem? = null
         enableEdgeToEdge()
         setContent {
             AlarmManagerGuideTheme {
-                var secondsText by remember {
-                    mutableStateOf("")
-                }
-                var message by remember {
-                    mutableStateOf("")
-                }
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(16.dp),
-                    verticalArrangement = Arrangement.Center
+
+                var secondsText = 7L
+                var message = "jorik"
+
+                Button(
+                    onClick = {
+                        val alarmItem = AlarmItem(
+                            time = LocalDateTime.now()
+                                .plusSeconds(secondsText),
+                            message = message
+                        )
+                        scheduler.schedule(alarmItem)
+                    },
+                    modifier = Modifier.padding(16.dp)
                 ) {
-                    OutlinedTextField(
-                        value = secondsText,
-                        onValueChange = {
-                            secondsText = it
-                        },
-                        modifier = Modifier.fillMaxWidth(),
-                        placeholder = {
-                            Text("Trigger alarm in seconds")
-                        }
-                    )
-                    OutlinedTextField(
-                        value = message,
-                        onValueChange = {
-                            message = it
-                        },
-                        modifier = Modifier.fillMaxWidth(),
-                        placeholder = {
-                            Text("Message")
-                        }
-                    )
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.Center
-                    ) {
-                        Button(
-                            onClick = {
-                                alarmItem = AlarmItem(
-                                    time = LocalDateTime.now()
-                                        .plusSeconds(secondsText.toLong()),
-                                    message = message
-                                )
-                                alarmItem?.let(scheduler::schedule)
-                                secondsText = ""
-                                message = ""
-                            }
-                        ) {
-                            Text("Schedule")
-                        }
-                        Button(
-                            onClick = {
-                                alarmItem?.let(scheduler::cancel)
-                            }
-                        ) {
-                            Text("Cancel")
-                        }
-                    }
-                }
+                    Text("Schedule")
+            }
             }
         }
     }

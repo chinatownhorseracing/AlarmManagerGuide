@@ -6,7 +6,7 @@ import android.content.Context
 import android.content.Intent
 import java.time.ZoneId
 
-class AndroidAlarmScheduler(
+class AlarmScheduler(
     val context: Context
 ) {
     val alarmManager = context.getSystemService(AlarmManager::class.java)

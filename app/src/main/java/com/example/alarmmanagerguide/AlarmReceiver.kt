@@ -5,7 +5,10 @@ import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.os.VibrationEffect
+import android.os.Vibrator
 import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat.getSystemService
 
 class AlarmReceiver: BroadcastReceiver() {
 
@@ -31,9 +34,13 @@ class AlarmReceiver: BroadcastReceiver() {
             .setAutoCancel(true)
             .setFullScreenIntent(pendingIntent, true)
 
+
+
         val notificationManager = context.getSystemService(NotificationManager::class.java)
         notificationManager.notify(1, builder.build())
 
-        println("Alarm triggered: $message")
+
+
+
     }
 }

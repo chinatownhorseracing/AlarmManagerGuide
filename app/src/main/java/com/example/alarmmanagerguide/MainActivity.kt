@@ -26,7 +26,7 @@ class MainActivity : ComponentActivity() {
         val scheduler = AlarmScheduler(this)
         setContent {
             val persons by viewModel.persons.collectAsState()
-            val secondsText = 7L
+            val secondsText = 3600L
             val message = "test message"
 
 

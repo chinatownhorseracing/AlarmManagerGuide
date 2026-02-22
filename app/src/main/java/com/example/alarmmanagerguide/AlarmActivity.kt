@@ -34,7 +34,7 @@ class AlarmActivity : ComponentActivity() {
                             )
                                 .first()
                                 .find()!!
-                            record.name = "Nick"
+                            record.timesVaxed++
                         }
 
                         stopService(Intent(this@AlarmActivity, AlarmService::class.java))

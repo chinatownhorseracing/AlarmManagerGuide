@@ -25,15 +25,16 @@ class MainViewModel: ViewModel() {
             emptyList()
         )
 
-    init {
-        createSampleEntries()
-    }
+//    init {
+//        createSampleEntries()
+//    }
 
     fun createSampleEntries() {
         viewModelScope.launch {
             realm.write {
                 val person1 = Person().apply {
                     name = "John"
+                    timesVaxed = 0
                 }
 
                 copyToRealm(person1, updatePolicy = UpdatePolicy.ALL)
@@ -41,7 +42,7 @@ class MainViewModel: ViewModel() {
         }
     }
 
-    fun changeName(person: Person) {
+    fun incrementTimesVaxed(person: Person) {
         viewModelScope.launch {
             realm.write {
                 val record = query<Person>(
@@ -50,7 +51,7 @@ class MainViewModel: ViewModel() {
                 )
                     .first()
                     .find()!!
-                record.name = "Nick"
+                record.timesVaxed++
             }
         }
     }

@@ -46,6 +46,7 @@ class MainActivity : ComponentActivity() {
                 }
                 if (persons.isNotEmpty()) {
                     Text(persons[0].name)
+                    Text("${persons[0].timesVaxed}")
                 }
             }
         }

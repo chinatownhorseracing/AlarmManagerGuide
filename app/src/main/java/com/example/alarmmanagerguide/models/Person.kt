@@ -5,4 +5,5 @@ import io.realm.kotlin.types.annotations.PrimaryKey
 
 class Person: RealmObject {
     var name: String = ""
+    var timesVaxed: Int = 0
 }

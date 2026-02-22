@@ -1,5 +1,6 @@
 package com.example.alarmmanagerguide
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.VibrationEffect
 import android.os.Vibrator
@@ -21,10 +22,7 @@ class AlarmActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setShowWhenLocked(true)
         setTurnScreenOn(true)
-//        val vibrator = getSystemService(Vibrator::class.java)
-//        val pattern = longArrayOf(0, 500, 500)
-//        val effect = VibrationEffect.createWaveform(pattern, 0)
-//        vibrator.vibrate(effect)
+
         setContent {
             Button(
                 onClick = {
@@ -39,9 +37,7 @@ class AlarmActivity : ComponentActivity() {
                             record.name = "Nick"
                         }
 
-                        val vibrator = getSystemService(Vibrator::class.java)
-                        vibrator.cancel()
-
+                        stopService(Intent(this@AlarmActivity, AlarmService::class.java))
                         finish()
                     }
                 },

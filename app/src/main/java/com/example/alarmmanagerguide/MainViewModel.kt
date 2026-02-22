@@ -25,9 +25,9 @@ class MainViewModel: ViewModel() {
             emptyList()
         )
 
-//    init {
-//        createSampleEntries()
-//    }
+    init {
+        createSampleEntries()
+    }
 
     fun createSampleEntries() {
         viewModelScope.launch {
